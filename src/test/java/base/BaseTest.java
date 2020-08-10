@@ -2,8 +2,8 @@ package base;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -18,6 +18,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 
 public class BaseTest {
@@ -27,7 +28,7 @@ public class BaseTest {
     @BeforeClass
     public void setup(){
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver = new EventFiringWebDriver(new ChromeDriver());
+        driver = new EventFiringWebDriver(new ChromeDriver(getChromeOptions()));
         driver.register(new EventReporter());
 
         goHome();
@@ -77,5 +78,15 @@ public class BaseTest {
 
     public String getPageTitle(){
         return driver.getTitle();
+    }
+
+    private ChromeOptions getChromeOptions(){
+        final ChromeOptions options = new ChromeOptions();
+
+        options.setExperimentalOption("useAutomationExtension", false);
+        options.setExperimentalOption("excludeSwitches", Collections.singletonList("enable-automation"));
+        options.setHeadless(true);
+
+        return options;
     }
 }

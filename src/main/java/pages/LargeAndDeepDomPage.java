@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class LargeAndDeepDomPage {
     private final WebDriver driver;
-    private By table = By.id("large-table");
+    private final By table = By.id("large-table");
 
     public LargeAndDeepDomPage(WebDriver driver) {
         this.driver = driver;

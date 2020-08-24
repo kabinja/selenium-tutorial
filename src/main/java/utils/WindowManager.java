@@ -2,9 +2,7 @@ package utils;
 
 import org.openqa.selenium.WebDriver;
 
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
 
 public class WindowManager {
     private final WebDriver driver;
